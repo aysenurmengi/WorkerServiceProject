@@ -1,4 +1,5 @@
 ﻿using EntityLayer;
+using EntityLayer.WatcherDto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,6 @@ namespace DataLayer.Abstract
     public interface IWatcherRepository : IGeneric<WatcherTables>
     {
         IQueryable<WatcherTables> GetAll(); // getall() vardı ama başını api için değiştim
-        IEnumerable<WatcherTables> GetWatchersByFilter(DateTime startDate, DateTime endDate, string type); //metodu kullanmak için burda tanımladım
+        IEnumerable<WatcherTables> GetWatchersByFilter(WatcherRequestDto request); //metodu kullanmak için burda tanımladım
     }
 }

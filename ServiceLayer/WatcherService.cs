@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using EntityLayer.WatcherDto;
 
 namespace ServiceLayer
 {
@@ -25,10 +26,10 @@ namespace ServiceLayer
             await _repository.Create(entry); // veriyi repository üzerinden veritabanına ekliyoruz
         }
 
-        public async Task<IEnumerable<WatcherTables>> GetWatchersByFilter(DateTime startDate, DateTime endDate, string type)
+        public async Task<IEnumerable<WatcherTables>> GetWatchersByFilter(WatcherRequestDto request)
         {
             // EFWatcher üzerinden filtreleme işlemini çağırıyoruz
-            return await Task.FromResult(_repository.GetWatchersByFilter(startDate, endDate, type));
+            return await Task.FromResult(_repository.GetWatchersByFilter(request));
         }
 
     }

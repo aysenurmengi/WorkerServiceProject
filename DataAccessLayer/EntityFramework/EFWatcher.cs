@@ -1,6 +1,8 @@
 ﻿using DataLayer.Abstract;
 using DataLayer.Repository;
 using EntityLayer;
+using EntityLayer.Enums;
+using EntityLayer.WatcherDto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +18,10 @@ namespace DataLayer.EntityFramework
 
         }
         
-        public IEnumerable<WatcherTables> GetWatchersByFilter(DateTime startDate, DateTime endDate, string type)
+        public IEnumerable<WatcherTables> GetWatchersByFilter(WatcherRequestDto request)
         {
-            return Where(w => w.Time >= startDate && w.Time <= endDate && w.Type == type);
+            //saat muhabbetinden burdaki .Date'ler sayesinde kurtuldum
+            return Where(w => w.Time.Date >= request.startDate.Date && w.Time.Date <= request.endDate.Date && w.Type == request.Type.ToString());
         }
 
     }
