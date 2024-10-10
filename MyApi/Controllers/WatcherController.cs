@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer;
 using ServiceLayer.Abstract;
+using System.Globalization;
 
 
 namespace MyApi.Controllers
@@ -20,6 +21,12 @@ namespace MyApi.Controllers
         //[FromQuery] -> parametreleri query string olarak alıyor, HTTP isteğini alıp metoda veriyoruz
         public async Task<IActionResult> GetWatchersByFilter([FromQuery] WatcherRequestDto request)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState); // Geçersiz model durumu
+            }
+
+
             //servisdeki GetWatchersByFilter'a gidip parametrelerin sonuçları veritabanından çekiliyor
             var result = await _watcherService.GetWatchersByFilter(request);
             if (result == null || !result.Any())
